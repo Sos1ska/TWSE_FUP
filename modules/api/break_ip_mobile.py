@@ -10,7 +10,7 @@ except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib 
 from json import loads, dump
 import datetime
 
-class ConstructorAnswers:
+class Constructor:
     def __file__(self, country, iso, telcod, capital, mcc):
         data_for_out = f"""[{str(datetime.datetime.now().date())}]
 Country={country}
@@ -56,7 +56,7 @@ MCC{mcc}"""
         }
         return jsona
 
-class BreakIPAddressMobile(ConstructorAnswers):
+class BreakIPAddressMobile(Constructor):
     my_name_class = "BreakIPAddressMobile"
 
     way = ""

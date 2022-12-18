@@ -54,3 +54,8 @@ The same as TWSE itself, only with the possibility of implementation in your pro
                         City       :::Ashburn:::
 
                         AS         :::AS15169 Google LLC:::
+
+<b>Install</b>
+1. Downloading the repository<br>
+2. Unpack and put in a folder "Python/Python(Your Version Python)/Lib/site-packages"<br>
+3. The End

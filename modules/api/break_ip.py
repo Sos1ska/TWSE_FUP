@@ -94,7 +94,7 @@ class BreakIPAddress(Constructor):
                 else : self.way=way
         else : raise NotFoundParameters(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found Parameters -> {mode} ]')
 
-    def __main__(self):
+    def main(self):
         if self.mode == "OnlyText":
             send_requests = get(f'http://ip-api.com/json/{self.ip}')
             answer = send_requests

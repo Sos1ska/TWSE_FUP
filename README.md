@@ -43,7 +43,7 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 # How to use?
 <code>from TWSE_FUP import BreakIPAddress</code><br>
-<code>startwork = BreakIPAddress("OnlyText", "8.8.8.8", autoprint=True).__main__</code><br>
+<code>startwork = BreakIPAddress("OnlyText", "8.8.8.8", autoprint=True).main</code><br>
 <code>startwork()</code><br>
 <b>Example Answer</b><br>
 

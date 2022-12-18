@@ -36,7 +36,7 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 <code>BreakNumber</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>number</code> --- The parameter is needed to set your ip<br>
+<code>number</code> --- The parameter is needed to set your number phone<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
 <code>debug</code> --- Needed if the file is created and gives a response to the console if the value is <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br><br>

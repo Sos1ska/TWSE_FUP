@@ -40,13 +40,33 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 <code>startwork()</code><br>
 <b>Example Answer</b><br>
 
-                        Country    :::United States:::     
+                        Continent         :::North America:::    
 
-                        RegionName :::Virginia:::
+                        Country           :::United States:::    
 
-                        City       :::Ashburn:::
+                        RegionName        :::Virginia:::
 
-                        AS         :::AS15169 Google LLC:::
+                        City              :::Ashburn:::
+
+                        Lat               :::39.03:::
+
+                        Lon               :::-77.5:::
+
+                        ISP               :::Google LLC:::       
+
+                        ORG               :::Google Public DNS:::
+
+                        AS                :::AS15169 Google LLC:::
+
+                        ASName            :::GOOGLE:::
+
+                        Reverse           :::dns.google:::
+
+                        MobileConnection  :::False:::
+
+                        ConnectionProxy   :::False:::
+
+                        Hosting           :::True:::
 
 <b>Install</b>
 1. Downloading the repository<br>

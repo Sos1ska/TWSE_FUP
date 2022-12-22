@@ -12,43 +12,93 @@ from json import loads, dump
 import datetime
 
 class Constructor:
-    def __file__(self, country, regionname, city, asb):
+    def __file__(self, continent, country, regionname, city, lat, lon, isp, org, asb, asname, reverse, mobile, proxy, hosting):
         data_for_out = f"""[{str(datetime.datetime.now().date())}]
+Continent={continent}
 Country={country}
 RegionName={regionname}
 City={city}
-AS={asb}"""
+Lat={lat}
+Lon={lon}
+ISP={isp}
+ORG={org}
+AS={asb}
+ASName={asname}
+Reverse={reverse}
+MobileConnection={mobile}
+ConnectionProxy={proxy}
+Hosting={hosting}"""
         return data_for_out
-    def __text__(self, country, regionname, city, asb):
+    def __text__(self, continent, country, regionname, city, lat, lon, isp, org, asb, asname, reverse, mobile, proxy, hosting):
         data_for_out = f"""
-\t\t\tCountry    :::{country}:::\n
-\t\t\tRegionName :::{regionname}:::\n
-\t\t\tCity       :::{city}:::\n
-\t\t\tAS         :::{asb}:::\n"""
+\t\t\tContinent         :::{continent}:::\n
+\t\t\tCountry           :::{country}:::\n
+\t\t\tRegionName        :::{regionname}:::\n
+\t\t\tCity              :::{city}:::\n
+\t\t\tLat               :::{lat}:::\n
+\t\t\tLon               :::{lon}:::\n
+\t\t\tISP               :::{isp}:::\n
+\t\t\tORG               :::{org}:::\n
+\t\t\tAS                :::{asb}:::\n
+\t\t\tASName            :::{asname}:::\n
+\t\t\tReverse           :::{reverse}:::\n
+\t\t\tMobileConnection  :::{mobile}:::\n
+\t\t\tConnectionProxy   :::{proxy}:::\n
+\t\t\tHosting           :::{hosting}:::\n"""
         return data_for_out
-    def __html__(self, country, regionname, city, asb):
+    def __html__(self, continent, country, regionname, city, lat, lon, isp, org, asb, asname, reverse, mobile, proxy, hosting):
         html = f"""<!DOCTYPE html>
 <head>
-    <title>TWSEConsoleFUP 0.1</title>
+    <title>TWSEConsoleFUP 0.2</title>
 </head>
 <body>
+    <div class="Continent">{continent}
+    </div>
     <div class="Country">{country}
     </div>
     <div class="RegionName">{regionname}
     </div>
     <div class="City">{city}
     </div>
+    <div class="Lat">{lat}
+    </div>
+    <div class="Lon">{lon}
+    </div>
+    <div class="ISP">{isp}
+    </div>
+    <div class="ORG">{org}
+    </div>
     <div class="AS">{asb}
+    </div>
+    <div class="ASName">{asname}
+    </div>
+    <div class="Reverse">{reverse}
+    </div>
+    <div class="MobileConnection">{mobile}
+    </div>
+    <div class="ProxyConnection">{proxy}
+    </div>
+    <div class="Hosting">{hosting}
     </div>
 </body>
 """
         return html
-    def __json__(self, country, regionname, city, asb):
+    def __json__(self, continent, country, regionname, city, lat, lon, isp, org, asb, asname, reverse, mobile, proxy, hosting):
         jsona = {
+            "Continent": f"{continent}",
             "Country": f"{country}",
             "RegionName": f"{regionname}",
             "City": f"{city}",
-            "AS": f"{asb}"
+            "Lat": f"{lat}",
+            "Lon": f"{lon}",
+            "ISP": f"{isp}",
+            "ORG": f"{org}",
+            "AS": f"{asb}",
+            "ASName": f"{asname}",
+            "Reverse": f"{reverse}",
+            "MobileConnection": f"{mobile}",
+            "ProxyConnection": f"{proxy}",
+            "Hosting": f"{hosting}"
         }
         return jsona
 
@@ -102,9 +152,9 @@ class BreakIPAddress(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             if self.autoprint == True or self.autoprint == "True" : print(
-                super().__text__(Handler["country"], Handler["regionName"], Handler["city"], Handler["as"])
+                super().__text__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"])
             )
-            elif self.autoprint == False or self.autoprint == "False" : return super().__text__(Handler["country"], Handler["regionName"], Handler["city"], Handler["as"])
+            elif self.autoprint == False or self.autoprint == "False" : return super().__text__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"])
             else : raise NotFoundParameters(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found Parameters -> {self.autoprint} ]')
         elif self.mode == "FileAnswer":
             send_requests = get(f'http://ip-api.com/json/{self.ip}')
@@ -113,7 +163,7 @@ class BreakIPAddress(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__file__(Handler["country"], Handler["regionName"], Handler["city"], Handler["as"])), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__file__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"])), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
@@ -124,7 +174,7 @@ class BreakIPAddress(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__html__(Handler["country"], Handler["regionName"], Handler["city"], Handler["as"])), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__html__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"])), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
@@ -135,7 +185,7 @@ class BreakIPAddress(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["country"], Handler["regionName"], Handler["city"], Handler["as"]), file), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"]), file), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')

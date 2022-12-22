@@ -12,24 +12,26 @@ from json import loads, dump
 import datetime
 
 class Constructor:
-    def __file__(self, opername, mnc, brand, inn, mobile):
+    def __file__(self, opername, mnc, brand, inn, mobile, name):
         data_for_out = f"""[{str(datetime.datetime.now().date())}]
 OperName={opername}
 MNC={mnc}
 Brand={brand}
 INN={inn}
 Work_Mobile={mobile}
+Name={name}
 """
         return data_for_out
-    def __text__(self, opername, mnc, brand, inn, mobile):
+    def __text__(self, opername, mnc, brand, inn, mobile, name):
         data_for_out = f"""
 \t\t\tOperName    :::{opername}:::\n
 \t\t\tMNC         :::{mnc}:::\n
 \t\t\tBrand       :::{brand}:::\n
 \t\t\tINN         :::{inn}:::\n
-\t\t\tWork_Mobile :::{mobile}:::\n"""
+\t\t\tWork_Mobile :::{mobile}:::\n
+\t\t\tName        :::{name}:::\n"""
         return data_for_out
-    def __html__(self, opername, mnc, brand, inn, mobile):
+    def __html__(self, opername, mnc, brand, inn, mobile, name):
         html = f"""<!DOCTYPE html>
 <head>
     <title>TWSEConsoleFUP 0.1</title>
@@ -44,16 +46,20 @@ Work_Mobile={mobile}
     <div class="INN">{inn}
     </div>
     <div class="Work_Mobile">{mobile}
+    </div>
+    <div class="Name">{name}
+    </div>
 </body>
 """
         return html
-    def __json__(self, opername, mnc, brand, inn, mobile):
+    def __json__(self, opername, mnc, brand, inn, mobile, name):
         jsona = {
             "Opername": f"{opername}",
             "MNC": f"{mnc}",
             "Brand": f"{brand}",
             "INN": f"{inn}",
-            "Work_Mobile": f"{mobile}"
+            "Work_Mobile": f"{mobile}",
+            "Name": f"{name}"
         }
         return jsona
 
@@ -107,9 +113,9 @@ class BreakNumber(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             if self.autoprint == True or self.autoprint == "True" : print(
-                super().__text__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"])
+                super().__text__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"], Handler["region"]["name"])
             )
-            elif self.autoprint == False or self.autoprint == "False" : return super().__text__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"])
+            elif self.autoprint == False or self.autoprint == "False" : return super().__text__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"], Handler["region"]["name"])
             else : raise NotFoundParameters(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found Parameters -> {self.autoprint} ]')
         elif self.mode == "FileAnswer":
             send_requests = get(f'https://htmlweb.ru/json/mnp/phone/{self.number}')
@@ -118,7 +124,7 @@ class BreakNumber(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__file__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"])), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__file__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"], Handler["region"]["name"])), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
@@ -129,7 +135,7 @@ class BreakNumber(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__html__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"])), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : file.write(super().__html__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"], Handler["region"]["name"])), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
@@ -140,7 +146,7 @@ class BreakNumber(Constructor):
             site_json = loads(soup_json)
             Handler = site_json
             try:
-                with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"]), file), file.close()
+                with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["oper"]["name"], Handler["oper"]["mnc"], Handler["oper"]["brand"], Handler["oper"]["inn"], Handler["mobile"], Handler["region"]["name"]), file), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')

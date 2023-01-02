@@ -9,6 +9,8 @@
 <code>requests</code><br>
 <code>bs4</code><br>
 <code>json</code><br>
+<code>pandas</code><br>
+<code>openpyxl</code><br>
 
 The same as TWSE itself, only with the possibility of implementation in your program\script
 

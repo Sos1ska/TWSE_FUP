@@ -1,5 +1,5 @@
 my_name_file = "break_ip"
-from typing import Any
+import os
 
 from ..Handlers.exceptions import ImportErrorTWSE, FileErrorTWSE, NotFoundParameters, Base
 
@@ -7,6 +7,8 @@ try : from requests import get
 except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "requests" ]')
 try : from bs4 import BeautifulSoup
 except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "bs4" ]')
+try : from pandas import *
+except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "pands" ]')
 
 from json import loads, dump
 import datetime
@@ -101,6 +103,22 @@ Hosting={hosting}"""
             "Hosting": f"{hosting}"
         }
         return jsona
+    def __excel__(self, continent, country, regionname, city, lat, lon, isp, org, asb, asname, reverse, mobile, proxy, hosting):
+        DataFrames = DataFrame({"Continent" : [continent],
+                                "Country" : [country],
+                                "RegionName" : [regionname],
+                                "City" : [city],
+                                "Lat" : [lat],
+                                "Lon" : [lon],
+                                "ISP" : [isp],
+                                "ORG" : [org],
+                                "AS" : [asb],
+                                "ASName" : [asname],
+                                "Reverse" : [reverse],
+                                "MobileConnection" : [mobile],
+                                "ProxyConnection" : [proxy],
+                                "Hosting" : [hosting]})
+        return DataFrames
 
 class BreakIPAddress(Constructor):
     my_name_class = "BreakIPAddress"
@@ -111,8 +129,8 @@ class BreakIPAddress(Constructor):
     autoprint = ""
     debug = ""
 
-    modelist = ["FileAnswer", "OnlyText", "HTML", "JSON", "TEST"]
-    speclist = ["FileAnswer", "HTML", "JSON"]
+    modelist = ["FileAnswer", "OnlyText", "HTML", "JSON", "EXCEL"]
+    speclist = ["FileAnswer", "HTML", "JSON", "EXCEL"]
 
     def __init__(self, mode, ip=bytes, way=None, autoprint=True or False, debug=True or False):
         """`mode` - Sets the mode for the answer.
@@ -133,7 +151,9 @@ class BreakIPAddress(Constructor):
         
         `HTML` - Creates a file with the html extension, will create a lighter one, because will allow it to be quickly parsed or simply output for the server.
         
-        `JSON` - Creates a file with the json extension, will create an easier one, because will allow it to be quickly parsed or simply output for the server"""
+        `JSON` - Creates a file with the json extension, will create an easier one, because will allow it to be quickly parsed or simply output for the server.
+
+        `EXCEL` - Creates a file with the excel extension."""
         self.mode=mode
         self.ip=ip
         self.autoprint=autoprint
@@ -187,5 +207,17 @@ class BreakIPAddress(Constructor):
             try:
                 with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"]), file), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
+            if self.debug == True or self.debug == "True":
+                print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
+        elif self.mode == "EXCEL":
+            if os.path.isfile(self.way) == False : mode = 'w'
+            else : mode = 'a'
+            send_requests = get(f'http://ip-api.com/json/{self.ip}?fields=status,message,continent,country,regionName,city,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting')
+            answer = send_requests
+            soup_json = BeautifulSoup(answer.text, 'html.parser').text.strip()
+            site_json = loads(soup_json)
+            Handler = site_json
+            Data = super().__excel__(Handler["continent"], Handler["country"], Handler["regionName"], Handler["city"], Handler["lat"], Handler["lon"], Handler["isp"], Handler["org"], Handler["as"], Handler["asname"], Handler["reverse"], Handler["mobile"], Handler["proxy"], Handler["hosting"])
+            with ExcelWriter(self.way, engine="openpyxl", mode=mode) as writer : Data.to_excel(writer, sheet_name="IP")
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')

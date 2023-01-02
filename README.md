@@ -17,6 +17,7 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 # Parameters and arguments
 <code>BreakIPAddress</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
+<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>ip</code> --- The parameter is needed to set your ip<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
@@ -24,6 +25,7 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 <code>BreakMACAddress</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
+<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>mac</code> --- The parameter is needed to set your mac<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
@@ -31,6 +33,7 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 <code>BreakNumber</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
+<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>number</code> --- The parameter is needed to set your number phone<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>

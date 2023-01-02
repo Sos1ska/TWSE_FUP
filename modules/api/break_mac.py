@@ -1,5 +1,5 @@
 my_name_file = "break_mac"
-from typing import Any
+import os
 
 from ..Handlers.exceptions import ImportErrorTWSE, FileErrorTWSE, NotFoundParameters, Base
 
@@ -7,6 +7,8 @@ try : from requests import get
 except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "requests" ]')
 try : from bs4 import BeautifulSoup
 except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "bs4" ]')
+try : from pandas import *
+except ImportError : raise ImportErrorTWSE(f'[ {my_name_file} ] - [ Install lib "pands" ]')
 
 from json import loads, dump
 import datetime
@@ -47,7 +49,12 @@ BlockSize={block_size}
             "BlockSize": f"{block_size}"
         }
         return jsona
-
+    def __excel__(self, company, address, block_size):
+        DataFrames = DataFrame({"Company" : [company],
+                                "Address" : [address],
+                                "Block_Size" : [block_size]})
+        return DataFrames
+    
 class BreakMACAddress(Constructor):
     my_name_class = "BreakMACAddress"
 
@@ -57,8 +64,8 @@ class BreakMACAddress(Constructor):
     autoprint = ""
     debug = ""
 
-    modelist = ["FileAnswer", "OnlyText", "HTML", "JSON", "TEST"]
-    speclist = ["FileAnswer", "HTML", "JSON"]
+    modelist = ["FileAnswer", "OnlyText", "HTML", "JSON", "EXCEL"]
+    speclist = ["FileAnswer", "HTML", "JSON", "EXCEL"]
 
     def __init__(self, mode, mac=bytes, way=None, autoprint=True or False, debug=True or False):
         """`mode` - Sets the mode for the answer.
@@ -79,7 +86,9 @@ class BreakMACAddress(Constructor):
         
         `HTML` - Creates a file with the html extension, will create a lighter one, because will allow it to be quickly parsed or simply output for the server.
         
-        `JSON` - Creates a file with the json extension, will create an easier one, because will allow it to be quickly parsed or simply output for the server"""
+        `JSON` - Creates a file with the json extension, will create an easier one, because will allow it to be quickly parsed or simply output for the server.
+        
+        `EXCEL` - Creates a file with the json extension"""
         self.mode=mode
         self.mac=mac
         self.autoprint=autoprint
@@ -133,5 +142,17 @@ class BreakMACAddress(Constructor):
             try:
                 with open(self.way, "w+", encoding='utf-8') as file : dump(super().__json__(Handler["company"], Handler["address"], Handler["block_size"]), file), file.close()
             except FileNotFoundError : raise FileErrorTWSE(f'[ {my_name_file}.{self.my_name_class} ] - [ Not Found path, maybe your folder delete -> {self.way} ]')
+            if self.debug == True or self.debug == "True":
+                print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')
+        elif self.mode == "EXCEL":
+            if os.path.isfile(self.way) == False : mode = 'w'
+            else : mode = 'a'
+            send_requests = get(f'https://api.2ip.ua/mac.json?mac={self.mac}')
+            answer = send_requests
+            soup_json = BeautifulSoup(answer.text, 'html.parser').text.strip()
+            site_json = loads(soup_json)
+            Handler = site_json
+            Data = super().__excel__(Handler["companny"], Handler["address"], Handler["block_size"])
+            with ExcelWriter(self.way, engine="openpyxl", mode=mode) as writer : Data.to_excel(writer, sheet_name="MAC")
             if self.debug == True or self.debug == "True":
                 print(f'[ {my_name_file}.{self.my_name_class} ] - [ Code returned "1" ]')

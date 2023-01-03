@@ -3,7 +3,7 @@
 ![GitHub contributors](https://img.shields.io/badge/GitHub%20Contributors-1-blue)
 
 # Version
-0.2
+0.4
 
 # Required
 <code>requests</code><br>

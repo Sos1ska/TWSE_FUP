@@ -57,5 +57,5 @@ Hosting          :::True:::<br>
 
 <b>Install</b>
 1. Downloading the repository<br>
-2. Unpack and put in a folder "Python/Python(Your Version Python)/Lib/site-packages"<br>
+2. Unpack and put in a folder "Python/Python(3.10+)/Lib/site-packages"<br>
 3. The End

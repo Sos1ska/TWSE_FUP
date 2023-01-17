@@ -17,7 +17,6 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 # Parameters and arguments
 <code>BreakIPAddress</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>ip</code> --- The parameter is needed to set your ip<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
@@ -25,7 +24,6 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 <code>BreakMACAddress</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>mac</code> --- The parameter is needed to set your mac<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
@@ -33,7 +31,6 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 <code>BreakNumber</code><br>
 <code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>EXCEL</code> --- Returns the response as an excel file<br>
 <code>number</code> --- The parameter is needed to set your number phone<br>
 <code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
 <code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
@@ -41,37 +38,23 @@ The same as TWSE itself, only with the possibility of implementation in your pro
 
 # How to use?
 <code>from TWSE_FUP import BreakIPAddress</code><br>
-<code>startwork = BreakIPAddress("OnlyText", "8.8.8.8", autoprint=True).main</code><br>
-<code>startwork()</code><br>
-<b>Example Answer</b><br>
+<code>BreakIPAddress("OnlyText", "8.8.8.8", autoprint=True).main("all")</code><br>
+Answer Example:<br>
+Continent        :::North America:::<br>
+Country          :::United States:::<br>
+Region           :::Virginia:::<br>
+City             :::Ashburn:::<br>
+Lat              :::39.03:::<br>
+Lon              :::-77.5:::<br>
+ISP              :::Google LLC:::<br>
+ORG              :::Google Public DNS:::<br>
+AS               :::AS15169 Google LLC:::<br>
+ASName           :::GOOGLE:::<br>
+Reverse          :::dns.google:::<br>
+MobileConnection :::False:::<br>
+ProxyConnection  :::False:::<br>
+Hosting          :::True:::<br>
 
-                        Continent         :::North America:::    
-
-                        Country           :::United States:::    
-
-                        RegionName        :::Virginia:::
-
-                        City              :::Ashburn:::
-
-                        Lat               :::39.03:::
-
-                        Lon               :::-77.5:::
-
-                        ISP               :::Google LLC:::       
-
-                        ORG               :::Google Public DNS:::
-
-                        AS                :::AS15169 Google LLC:::
-
-                        ASName            :::GOOGLE:::
-
-                        Reverse           :::dns.google:::
-
-                        MobileConnection  :::False:::
-
-                        ConnectionProxy   :::False:::
-
-                        Hosting           :::True:::
 
 <b>Install</b>
 1. Downloading the repository<br>

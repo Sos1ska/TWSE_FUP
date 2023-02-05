@@ -3,8 +3,8 @@ __code__ = '\n\nOpenSourceCode'
 
 my_name = 'break_mac'
 
-from ..handlers.type_returns import Type
-from ..handlers.exception import DataError, ParametersError
+from ..Handlers.type_returns import Type
+from ..Handlers.exception import DataError, ParametersError
 from requests import *
 from bs4 import BeautifulSoup
 from json import loads

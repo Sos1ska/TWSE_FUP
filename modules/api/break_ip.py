@@ -10,15 +10,58 @@ from bs4 import BeautifulSoup
 from json import loads
 
 class BreakIPAddress:
-    def __init__(self, mode, ip, way=None, autoprint=True or False, debug=True):
+    def __init__(self, mode, ip, way=None, autoprint=True or False, debug=True, proxy=None):
         self.mode=mode
         self.ip=ip
         self.autoprint=autoprint
         self.debug=debug
         self.way=way
+        self.proxy=proxy
+    def __checkproxy__(self):
+        bad = 0
+        true = 0
+        try:
+            send_request = get("http://ip-api.com/json")
+            answer = send_request
+            soup_json = BeautifulSoup(answer.text, "html.parser").text.strip()
+            site_json = loads(soup_json)
+            Handler = site_json
+            user_ip = Handler["query"]
+            try:
+                send_request_proxy = get("http://ip-api.com/json", proxies=self.proxy)
+            except exceptions.ConnectionError:
+                raise RequestsError("Not Found connection to internet")
+            answer_proxy = send_request_proxy
+            soup_json_proxy = BeautifulSoup(answer_proxy.text, "html.parser").text.strip()
+            site_json_proxy = loads(soup_json_proxy)
+            Handler_proxy = site_json_proxy
+            user_ip_proxy = Handler_proxy["query"]
+            match self.debug:
+                case True : print(f'[ TWSE_FUP ] - [ user -> {user_ip}, proxy_user -> {user_ip_proxy} ]')
+                case False : pass
+            if user_ip == user_ip_proxy:
+                bad = bad + 1
+            else:
+                true = true + 1
+        except:
+            raise DataError("Error work with data. Maybe not found connection to internet")
+        finally:
+            if bad == 1:
+                return False
+            elif true == 1:
+                return True
     def __sendrequest__(self):
         try:
-            send_requests = get(f'http://ip-api.com/json/{self.ip}?fields=status,message,continent,country,regionName,city,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting')
+            if self.proxy is not None:
+                match self.__checkproxy__():
+                    case True:
+                        pass
+                    case False:
+                        raise RequestsError("Proxy not working")
+            if self.proxy is not None:
+                send_requests = get(f'http://ip-api.com/json/{self.ip}?fields=status,message,continent,country,regionName,city,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting', proxies=self.proxy)
+            else:
+                send_requests = get(f'http://ip-api.com/json/{self.ip}?fields=status,message,continent,country,regionName,city,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting')
             answer = send_requests
             soup_json = BeautifulSoup(answer.text, 'html.parser').text.strip()
             site_json = loads(soup_json)

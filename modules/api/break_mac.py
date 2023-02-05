@@ -5,7 +5,7 @@ my_name = 'break_mac'
 
 from ..handlers.type_returns import Type
 from ..handlers.exception import DataError, ParametersError
-from requests import get
+from requests import *
 from bs4 import BeautifulSoup
 from json import loads
 

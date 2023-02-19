@@ -3,7 +3,7 @@
 ![GitHub contributors](https://img.shields.io/badge/GitHub%20Contributors-1-blue)
 
 # Version
-0.4
+1.0
 
 # Required
 <code>requests</code><br>
@@ -11,51 +11,56 @@
 <code>json</code><br>
 <code>python 3.10+</code><br>
 
-The same as TWSE itself, only with the possibility of implementation in your program\script
+# Parameters
+<code>ip, number, mac</code> - Задаются данные которые хотите получить<br>
+<code>mode</code> - Передаётся режим работы. Есть 3 режима<br>
+<pre><code>OnlyText</code> - Ну тут логично, только текст, но требует ещё один аргумент в модуле main, это <code>type_return</code></pre><br>
+<pre><code>type_return</code> - Принимает <code>list</code> - вернёт ответ в виде массива, но не будет выводить в консоль<br>Принимает последний вариант, это <code>str</code></pre><br>
+<code>proxy</code> - Принимает данные об прокси сервера, то есть отправит запрос через него<br>
+<code>way</code> - Нужен при создании файла<br>
 
-# Parameters and arguments
-<code>BreakIPAddress</code><br>
-<code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>ip</code> --- The parameter is needed to set your ip<br>
-<code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
-<code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
-<code>debug</code> --- Needed if the file is created and gives a response to the console if the value is <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br><br>
+# Parameters _modules
+<code>ip, number, mac</code> - Также задаются данные которые хотите получить<br>
+<code>proxy</code> - Принимает данные об прокси сервера, то есть отправит запрос через него<br>
 
-<code>BreakMACAddress</code><br>
-<code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>mac</code> --- The parameter is needed to set your mac<br>
-<code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
-<code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
-<code>debug</code> --- Needed if the file is created and gives a response to the console if the value is <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br><br>
+<h1>Get data</h1><br>
+Для <code>BreakIPAddress_modules</code> это<br>
+<pre>Continent
+Country
+RegionName
+City
+Latitude
+Longtitude
+ISP
+Org
+AS
+ASName
+Reverse
+MobileConnection
+ProxyConnection
+Hosting</pre><br>
+ВНИМАНИЕ! - они всего лишь возвращают данные которые хотите получить, вам их надо выводить<br>
 
-<code>BreakNumber</code><br>
-<code>mode</code> --- Sets the mode for the answer. <code>OnlyText</code> --- Gives only text. <code>FileAnswer</code> --- Gives the answer as a file. <code>HTML</code> --- Returns the response as an html file. <code>JSON</code> --- Returns the response as a json file<br>
-<code>number</code> --- The parameter is needed to set your number phone<br>
-<code>way</code> --- File path settings if specify mode as <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br>
-<code>autoprint</code> --- Auto output to the console if mode is specified as <code>OnlyText</code><br>
-<code>debug</code> --- Needed if the file is created and gives a response to the console if the value is <code>FileAnswer</code>, <code>HTML</code>, <code>JSON</code><br><br>
+Для <code>BreakMACAddress_modules</code> это <br>
+<pre>Company
+Address
+Block_Size</pre><br>
 
-# How to use?
-<code>from TWSE_FUP import BreakIPAddress</code><br>
-<code>BreakIPAddress("OnlyText", "8.8.8.8", autoprint=True).main("all")</code><br>
-Answer Example:<br>
-Continent        :::North America:::<br>
-Country          :::United States:::<br>
-Region           :::Virginia:::<br>
-City             :::Ashburn:::<br>
-Lat              :::39.03:::<br>
-Lon              :::-77.5:::<br>
-ISP              :::Google LLC:::<br>
-ORG              :::Google Public DNS:::<br>
-AS               :::AS15169 Google LLC:::<br>
-ASName           :::GOOGLE:::<br>
-Reverse          :::dns.google:::<br>
-MobileConnection :::False:::<br>
-ProxyConnection  :::False:::<br>
-Hosting          :::True:::<br>
+Для <code>BreakNumberPhone_modules</code> это<br>
+<pre>OperName
+OperMNC
+OperBrand
+OperINN
+MobileWorker
+RegionName</pre><br>
 
+<h1>Example</h1>
+<code>from TWSE_FUP import BreakIPAddress_modules<br>
+work = BreakIPAddress_modules(ip="8.8.8.8")
+print("Continent", work.Continent())</code><br><br>
+<code>from TWSE_FUP import BreakIPAddress<br>
+print(BreakIPAddress(mode="OnlyText", ip="8.8.8.8").main(type_return="str")</code><br>
+И так с другими модулями
 
-<b>Install</b>
-1. Downloading the repository<br>
-2. Unpack and put in a folder "Python/Python(3.10+)/Lib/site-packages"<br>
-3. The End
+# Groups
+VK : https://vk.com/twse_newsoffc<br>

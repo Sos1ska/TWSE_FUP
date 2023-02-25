@@ -398,46 +398,47 @@ class BreakIPAddress:
 
 class BreakIPAddress_modules:
     def __init__(self, ip, proxy=None, way="cache_ip.json"):
+        self.way=way
         BreakIPAddress(mode="JSON", ip=ip, way=way, proxy=proxy, service="ip-api").main(ignore_msg=True)
     def Continent(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["1"]
     def Country(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["2"]
     def RegionName(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["3"]
     def City(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["4"]
     def Latitude(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["5"]
     def Longtitude(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["6"]
     def ISP(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["7"]
     def Org(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["8"]
     def AS(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["9"]
     def ASName(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["10"]
     def Reverse(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["11"]
     def MobileConnection(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["12"]
     def ProxyConnection(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["13"]
     def Hosting(self):
-        with open('cache_ip.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["14"]

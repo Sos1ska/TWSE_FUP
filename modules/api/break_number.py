@@ -132,22 +132,23 @@ class BreakNumberPhone:
 
 class BreakNumberPhone_modules:
     def __init__(self, number, proxy=None, way="cache_number_phone.json"):
+        self.way=way
         BreakNumberPhone(mode="JSON", number=number, way=way, proxy=proxy).main(ignore_msg=True)
     def OperName(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["1"]
     def OperMNC(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["2"]
     def OperBrand(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["3"]
     def OperINN(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["4"]
     def MobileWorker(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["5"]
     def RegionName(self):
-        with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
+        with open(self.way, 'r') as file_read : data=load(file_read)
         return data["6"]

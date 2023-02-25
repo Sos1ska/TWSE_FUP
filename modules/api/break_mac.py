@@ -112,13 +112,14 @@ class BreakMACAddress:
 
 class BreakMACAddress_modules:
     def __init__(self, mac, proxy=None, way="cache_mac.json"):
+        self.way=way
         BreakMACAddress(mode="JSON", mac=mac, way=way, proxy=proxy).main(ignore_msg=True)
     def Company(self):
-        with open(r'cache_mac.json', 'r') as file_read : data = load(file_read)
+        with open(self.way, 'r') as file_read : data = load(file_read)
         return data["1"]
     def Address(self):
-        with open(r'cache_mac.json', 'r') as file_read : data = load(file_read)
+        with open(self.way, 'r') as file_read : data = load(file_read)
         return data["2"]
     def Block_Size(self):
-        with open(r'cache_mac.json', 'r') as file_read : data = load(file_read)
+        with open(self.way, 'r') as file_read : data = load(file_read)
         return data["3"]

@@ -131,8 +131,8 @@ class BreakNumberPhone:
                     for i in range(0, d) : print(answer[i], end="\n")
 
 class BreakNumberPhone_modules:
-    def __init__(self, number, proxy=None):
-        BreakNumberPhone(mode="JSON", number=number, way="cache_number_phone.json", proxy=proxy).main(ignore_msg=True)
+    def __init__(self, number, proxy=None, way="cache_number_phone.json"):
+        BreakNumberPhone(mode="JSON", number=number, way=way, proxy=proxy).main(ignore_msg=True)
     def OperName(self):
         with open(r'cache_number_phone.json', 'r') as file_read : data=load(file_read)
         return data["1"]

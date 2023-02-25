@@ -111,8 +111,8 @@ class BreakMACAddress:
                     for i in range(0, d) : print(answer[i], end="\n")
 
 class BreakMACAddress_modules:
-    def __init__(self, mac, proxy=None):
-        BreakMACAddress(mode="JSON", mac=mac, way="cache_mac.json", proxy=proxy).main(ignore_msg=True)
+    def __init__(self, mac, proxy=None, way="cache_mac.json"):
+        BreakMACAddress(mode="JSON", mac=mac, way=way, proxy=proxy).main(ignore_msg=True)
     def Company(self):
         with open(r'cache_mac.json', 'r') as file_read : data = load(file_read)
         return data["1"]

@@ -397,8 +397,8 @@ class BreakIPAddress:
                             for i in range(0, d) : print(answer[i], end="\n")
 
 class BreakIPAddress_modules:
-    def __init__(self, ip, proxy=None):
-        BreakIPAddress(mode="JSON", ip=ip, way="cache_ip.json", proxy=proxy, service="ip-api").main(ignore_msg=True)
+    def __init__(self, ip, proxy=None, way="cache_ip.json"):
+        BreakIPAddress(mode="JSON", ip=ip, way=way, proxy=proxy, service="ip-api").main(ignore_msg=True)
     def Continent(self):
         with open('cache_ip.json', 'r') as file_read : data=load(file_read)
         return data["1"]
